@@ -1,17 +1,19 @@
-#! /usr/bin/python
+#!/opt/alt/python27/bin/python2.7
 # Binh Pham
 # Shows cPanel owner of a domain
-# Command: whoowns example.com
 
 import sys
 import subprocess
 
-domain_input = sys.argv
-domain = domain_input[1]
-
 try:
+    domain_input = sys.argv
+    domain = domain_input[1]
+
     cmd = 'grep "={}" /var/cpanel/users/*'.format(domain)
     cmd_result = subprocess.check_output(cmd, shell=True)
+
     print((cmd_result.split(":")[0]).split("/")[4])
 except:
-    print("Domain not found")
+    print("Oops! There was an error. Please check usage is correct.")
+    print("Usage: whoowns domain.com")
+
